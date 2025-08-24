@@ -1,0 +1,64 @@
+{ Game   : Minecraft.Windows.exe
+  Version: 
+  Date   : 2025-08-24
+  Author : Uncle Awrt
+
+  This script does Toggle Sprint
+}
+
+[ENABLE]
+
+aobscanmodule(ToggleSprint,Minecraft.Windows.exe,0F B6 42 30 41 88 41 08) // should be unique
+alloc(newmem,$1000,ToggleSprint)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov eax,1
+  mov [r9+08],al
+  jmp return
+
+ToggleSprint:
+  jmp newmem
+  nop 3
+return:
+registersymbol(ToggleSprint)
+
+[DISABLE]
+
+ToggleSprint:
+  db 0F B6 42 30 41 88 41 08
+
+unregistersymbol(ToggleSprint)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: Minecraft.Windows.exe+1FA9F44
+
+Minecraft.Windows.exe+1FA9F1C: 0F B6 42 2B     - movzx eax,byte ptr [rdx+2B]
+Minecraft.Windows.exe+1FA9F20: 41 88 41 03     - mov [r9+03],al
+Minecraft.Windows.exe+1FA9F24: 0F B6 42 2C     - movzx eax,byte ptr [rdx+2C]
+Minecraft.Windows.exe+1FA9F28: 41 88 41 04     - mov [r9+04],al
+Minecraft.Windows.exe+1FA9F2C: 0F B6 42 2D     - movzx eax,byte ptr [rdx+2D]
+Minecraft.Windows.exe+1FA9F30: 41 88 41 05     - mov [r9+05],al
+Minecraft.Windows.exe+1FA9F34: 0F B6 42 2E     - movzx eax,byte ptr [rdx+2E]
+Minecraft.Windows.exe+1FA9F38: 41 88 41 06     - mov [r9+06],al
+Minecraft.Windows.exe+1FA9F3C: 0F B6 42 2F     - movzx eax,byte ptr [rdx+2F]
+Minecraft.Windows.exe+1FA9F40: 41 88 41 07     - mov [r9+07],al
+// ---------- INJECTING HERE ----------
+Minecraft.Windows.exe+1FA9F44: 0F B6 42 30     - movzx eax,byte ptr [rdx+30]
+// ---------- DONE INJECTING  ----------
+Minecraft.Windows.exe+1FA9F48: 41 88 41 08     - mov [r9+08],al
+Minecraft.Windows.exe+1FA9F4C: 0F B6 42 31     - movzx eax,byte ptr [rdx+31]
+Minecraft.Windows.exe+1FA9F50: 41 88 41 09     - mov [r9+09],al
+Minecraft.Windows.exe+1FA9F54: 0F 29 74 24 20  - movaps [rsp+20],xmm6
+Minecraft.Windows.exe+1FA9F59: 0F B6 42 32     - movzx eax,byte ptr [rdx+32]
+Minecraft.Windows.exe+1FA9F5D: 41 88 41 0A     - mov [r9+0A],al
+Minecraft.Windows.exe+1FA9F61: 0F B6 42 33     - movzx eax,byte ptr [rdx+33]
+Minecraft.Windows.exe+1FA9F65: 41 88 41 0B     - mov [r9+0B],al
+Minecraft.Windows.exe+1FA9F69: 0F B6 42 34     - movzx eax,byte ptr [rdx+34]
+Minecraft.Windows.exe+1FA9F6D: 41 88 41 0C     - mov [r9+0C],al
+}
