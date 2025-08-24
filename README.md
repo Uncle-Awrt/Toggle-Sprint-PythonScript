@@ -21,7 +21,7 @@ A Python script to toggle sprint in **Minecraft: Windows Edition(Bedrock)** usin
 - Python 3.8+
 - `pymem` library
 - `keyboard` library
-- Windows OS
+- Windows10 or 11
 
 Install dependencies via pip:
 
