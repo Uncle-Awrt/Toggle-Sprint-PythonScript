@@ -1,5 +1,5 @@
 # Minecraft Windows Edition Toggle Sprint Script
-Minecraft Bedrock Ver1.21.120 ~ 1.21.130 working... I think it works on other Versions to.
+Minecraft Bedrock Ver1.21.120 ~ 1.21.130 working... I think it works on other Versions too.
 
 # Toggle-Sprint-PythonScript
 
